@@ -3,21 +3,28 @@
 ##
 
 images:
+  registry: docker.io
   gitea: "gitea/gitea:1.9.3"
   postgres: "postgres:11"
   memcached: "memcached:1.5.19-alpine"
-  imagePullPolicy: Always
-  ## Specify imagePullSecrets
-  ## ref: https://kubernetes.io/docs/concepts/containers/images/#specifying-imagepullsecrets-on-a-pod
+  pullPolicy: IfNotPresent
+  ## Optionally specify an array of imagePullSecrets.
+  ## Secrets must be manually created in the namespace.
+  ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
   ##
-  # imagePullSecrets: myregistrykey
+  # pullSecrets:
+  #   - myRegistryKeySecretName
 
-## cache settings
+## Cache settings for memcache
 memcached:
   maxItemMemory: 64
   verbosity: v
   extendedOptions: modern
 
+## Configure the ingress resource that allows you to access the
+## Gitea installation. Set up the URL
+## ref: http://kubernetes.io/docs/user-guide/ingress/
+##
 ingress:
   ## Set to true to enable ingress record generation
   enabled: true
@@ -40,16 +47,17 @@ ingress:
 
   ## The list of additional hostnames to be covered with this ingress record.
   ## Most likely the hostname above will be enough, but in the event more hosts are needed, this is an array
-  ## hosts:
-  ## - name: gitea.local
-  ##   path: /
+  # hosts:
+  # - name: gitea.local
+  #   path: /
 
   ## The tls configuration for the ingress
   ## see: https://kubernetes.io/docs/concepts/services-networking/ingress/#tls
-  ## tls:
-  ## - hosts:
-  ##     - gitea.local
-  ##   secretName: gitea.local-tls
+  ## Uncomment below to enable tls / https for let's encrypt / cert-manager
+  # tls:    
+  #  - hosts:    
+  #    - gitea.local
+  #    secretName: gitea.tls 
 
   secrets:
   ## If you're providing your own certificates, please use this to add the certificates as secrets
@@ -66,7 +74,7 @@ ingress:
   #   certificate:
   #
 
-## chart defaults to using an ingress for http, but change to LoadBalancer if using you cluster supports it
+## This chart defaults to using an ingress for http, but change to LoadBalancer if using you cluster supports it
 service:
   http:
     serviceType: ClusterIP
@@ -114,11 +122,11 @@ resources:
 ##
 persistence:
   enabled: false
-  #existingGiteaClaim: gitea-gitea
-  #existingPostgresClaim: gitea-postgres
+  # existingGiteaClaim: gitea-gitea
+  # existingPostgresClaim: gitea-postgres
   giteaSize: 10Gi
   postgresSize: 5Gi
-  #storageClass: glusterfs
+  # storageClass: glusterfs
   accessMode: ReadWriteMany
 ## addtional annotations for hte pvcs  uncommenting below will prevent helm from deleting the pvc when hte chart is deleted
 #  annotations:
@@ -134,7 +142,7 @@ persistence:
 #      endpoints: "192.168.1.1 192.168.1.2 192.168.1.3"
 #      path: giteaPostgresData
 
-#Connect to an external database
+## Connect to an external database instead
 # externalDB:
 #   dbUser: "postgres"
 #   dbPassword: "<MY_PASSWORD>"
@@ -142,7 +150,8 @@ persistence:
 #   dbPort: "5432"
 #   dbDatabase: "gitea"
 
-# valid types: postgres, mysql, mssql, sqllite
+##  We're going to use an internal database
+## Valid types: postgres, mysql, mssql, sqllite
 dbType: "postgres"
 useInPodPostgres: true
 
@@ -153,16 +162,16 @@ inPodPostgres:
 
     ## Create a database user
     ## Default: postgres
-    # postgresUser:
+    ## postgresUser:
     ## Default: random 10 character string
-    # postgresPassword:
+    ## postgresPassword:
 
     ## Inject postgresPassword via a volume mount instead of environment variable
     usePasswordFile: false
 
     ## Use Existing secret instead of creating one
     ## It must have a postgres-password key containing the desired password
-    # existingSecret: 'secret'
+    ## existingSecret: 'secret'
 
     ## Create a database
     ## Default: the postgres user
@@ -171,12 +180,12 @@ inPodPostgres:
     ## Specify initdb arguments, e.g. --data-checksums
     ## ref: https://github.com/docker-library/docs/blob/master/postgres/content.md#postgres_initdb_args
     ## ref: https://www.postgresql.org/docs/current/static/app-initdb.html
-    # postgresInitdbArgs:
+    ## postgresInitdbArgs:
 
     ## Specify runtime config parameters as a dict, using camelCase, e.g.
     ## {"sharedBuffers": "500MB"}
     ## ref: https://www.postgresql.org/docs/current/static/runtime-config.html
-    # postgresConfig:
+    ## postgresConfig:
 
 
 ## Node labels and tolerations for pod assignment
@@ -190,12 +199,12 @@ affinity: {}
 deploymentAnnotations: {}
 podAnnotations: {}
 
-## In order to disable initial install screen you must have secretKey and disableInstaller=true
+## This will skip the initial installation screen. You must have a secretKey already defined
+## and disableInstaller set to True
 config:
-#  secretKey: define_your_secret
+##  secretKey: !#@FDEWREWR&*(
   disableInstaller: false
   offlineMode: false
   requireSignin: false
   disableRegistration: false
   openidSignin: true
-

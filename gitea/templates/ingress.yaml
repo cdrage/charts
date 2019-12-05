@@ -9,8 +9,8 @@ metadata:
     release: {{ .Release.Name | quote }}
     heritage: {{ .Release.Service | quote }}
   annotations:
-		{{- if .Values.ingress.certManager }}
-		kubernetes.io/tls-acme: "true"
+    {{- if .Values.ingress.certManager }}
+    kubernetes.io/tls-acme: "true"
     {{- end }}
     {{- range $key, $value := .Values.ingress.annotations }}
     {{ $key }}: {{ $value | quote }}

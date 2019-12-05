@@ -1,5 +1,5 @@
 name: gitea
-version: 1.9.3
+version: 1.0.1
 apiVersion: v2
 appVersion: 1.9.3
 description: Git with a cup of tea
@@ -15,5 +15,5 @@ sources:
   - https://github.com/go-gitea/gitea
   - https://hub.docker.com/r/gitea/gitea/
 maintainers:
-  - name: John Felten
-    email: john.felten@gmail.com
+  - name: Charlie Drage
+    email: charlie@charliedrage.com
