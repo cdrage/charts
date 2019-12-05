@@ -33,3 +33,14 @@ If release name contains chart name it will be used as a full name.
 {{- $name := default .Chart.Name "db" -}}
 {{- printf "%s-%s" .Release.Name $name | trunc 24 -}}
 {{- end -}}
+
+{{/*    
+Return the appropriate apiVersion for ingress.    
+*/}}    
+{{- define "gitea.ingress.apiVersion" -}}    
+{{- if semverCompare "<1.14-0" .Capabilities.KubeVersion.GitVersion -}}    
+{{- print "extensions/v1beta1" -}}    
+{{- else -}}    
+{{- print "networking.k8s.io/v1beta1" -}}    
+{{- end -}}    
+{{- end -}}  

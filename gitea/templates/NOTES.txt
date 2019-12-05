@@ -2,8 +2,7 @@
 
 {{- if .Values.ingress.enabled }}
 
-  
-  Ingress is enabled for this chart deployment.  Please access the web UI at {{ .Values.service.http.externalHost }}
+  Ingress is enabled for this chart deployment.  Please access the web UI at {{ .Values.ingress.hostname }}
   
 {{- else if contains "NodePort" .Values.service.http.serviceType }}
 
