@@ -1,0 +1,42 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+apiVersion: v2
+appVersion: 1.9.3
+description: Git with a cup of tea
+icon: https://docs.gitea.io/images/gitea.png
+keywords:
+- - git
+- - issue tracker
+- - code review
+- - wiki
+- - gitea
+- - gogs
+maintainers:
+- - email: charlie@charliedrage.com
+  name: Charlie Drage
+name: gitea
+sources:
+- - https://github.com/go-gitea/gitea
+- - https://hub.docker.com/r/gitea/gitea/
+version: 1.0.2
+
+...
+files:
+  gitea-1.0.2.tgz: sha256:b12eaf175ba3898330239840b63d9d00a6f44a352b8c109ac30f1d942f896696
+-----BEGIN PGP SIGNATURE-----
+
+wsFcBAEBCgAQBQJd6YLiCRDaInQDwDfWFwAAcjsQAB68OH9OTIGOb0EbAXl/bftB
+5azPKBBVDE/xoYIls/vTPWlUfet92wlMzaTncIrIXmWpAPT8uBMxY1Nn39zVzDZT
+ohOEhPlyHcuamikGjnV/RIOmgv8Y5/srZECDUtbtYsVbx6Tm9T6GTDLjg2Qr5qyV
+AIkDUD/z06Omt8Q5m6vN4D5CTLKT0MClYKZfWZg1OezexAkbVsksoS7Td9AfbFGs
+mr1rNZnTTP9gUvodoHKoyA37hf4qm+Yq8Hhb4oJK7bZ4aOtAEZEShlnoY+YNeK+z
+t82kzFrl+kwZxu+DYHQmLIdjZ/0RcCM6GsJUv5ho6fvMAaATLKNZ5w/zUE/o9x/K
+6TsDrrQnjI8/VOTnaUTt8GLLJ164gUUqy4BqmGJtSOnCUJI1qLr4ZIim3f+bThe7
+1vwoZJaemxsddmImfUpX6h1QQmMbrPaVivzfTUZtEopItdJq/miKCSnq7ydoN0Vx
+xTFMbg9Ic95oozqmTbM58DNSyx1mxzHdEoz3gkh5GS54Pg5QvbUnPUaeBavU0fIw
+/fbKlp4maWjjXDPUSe4QER/IFosbSNzfbJnmuQ7QF5XcU8K2BbvKo+qsxXXK9ryZ
+4B5xzzMzkkk9xnMD5tsvXPErHGSzY8NddHxzwblsk0b2DDOXbZg1hXyfFrpJGNZS
+7PuS71HaZ610BspJVAmG
+=56ys
+-----END PGP SIGNATURE-----
