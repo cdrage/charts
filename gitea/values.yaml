@@ -35,6 +35,7 @@ ingress:
   ## If tls is set to true, annotation ingress.kubernetes.io/secure-backends: "true" will automatically be set
   ## If certManager is set to true, annotation kubernetes.io/tls-acme: "true" will automatically be set
   annotations: {}
+  #  certmanager.k8s.io/cluster-issuer: letsencrypt-prod
   #  kubernetes.io/ingress.class: nginx
 
   ## The list of additional hostnames to be covered with this ingress record.
@@ -73,7 +74,7 @@ service:
     #nodePort: 30280
     # sometimes if is necesary to access through an external port i.e. http(s)://<dns-name>:<external-port>
     externalPort: 8280
-    externalHost: git.example.com
+    externalHost: gitea.local
   ssh:
     serviceType: ClusterIP
     port: 22
