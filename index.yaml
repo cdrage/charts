@@ -1,11 +1,11 @@
 apiVersion: v1
 entries:
   gitea:
-  - apiVersion: v1
+  - apiVersion: v2
     appVersion: 1.9.3
-    created: "2019-12-04T16:17:32.722521718-05:00"
+    created: "2019-12-05T16:56:57.324788423-05:00"
     description: Git with a cup of tea
-    digest: d2924f926d2ee4aae69038d0913b1da8d380323083292e4a6d35e7d8e5d714c1
+    digest: be5646c0b3408eb49dac6fc4b5d63bef8453d560db5cb80a9933938876986069
     icon: https://docs.gitea.io/images/gitea.png
     keywords:
     - git
@@ -15,13 +15,13 @@ entries:
     - gitea
     - gogs
     maintainers:
-    - email: john.felten@gmail.com
-      name: John Felten
+    - email: charlie@charliedrage.com
+      name: Charlie Drage
     name: gitea
     sources:
     - https://github.com/go-gitea/gitea
     - https://hub.docker.com/r/gitea/gitea/
     urls:
-    - gitea-1.9.3.tgz
-    version: 1.9.3
-generated: "2019-12-04T16:17:32.72132745-05:00"
+    - gitea-1.0.1.tgz
+    version: 1.0.1
+generated: "2019-12-05T16:56:57.323736581-05:00"
