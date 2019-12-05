@@ -2,6 +2,8 @@
 
 set -e
 
+git checkout gh-pages
+
 CURRENT_DIR=$PWD
 DIR=`mktemp -d`
 
