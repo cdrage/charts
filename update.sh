@@ -25,3 +25,4 @@ git add .
 DATE=`date`
 git commit -m "Update $DATE"
 git push origin gh-pages
+git checkout master
