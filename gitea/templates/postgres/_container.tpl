@@ -6,20 +6,20 @@ Create helm partial for postgres server
   image: "{{ .Values.images.postgres }}"
   imagePullPolicy: {{ default "" .Values.images.imagePullPolicy | quote }}
   args:
-    {{- range $key, $value := default dict .Values.inPodPostgres.postgresConfig }}
+    {{- range $key, $value := default dict .Values.postgresDatabase.postgresConfig }}
     - -c
     - '{{ $key | snakecase }}={{ $value }}'
     {{- end }}
   env:
   - name: POSTGRES_USER
-    value: {{ default "postgres" .Values.inPodPostgres.postgresUser | quote }}
+    value: {{ default "postgres" .Values.postgresDatabase.postgresUser | quote }}
   # Required for pg_isready in the health probes.
   - name: PGUSER
-    value: {{ default "postgres" .Values.inPodPostgres.postgresUser | quote }}
+    value: {{ default "postgres" .Values.postgresDatabase.postgresUser | quote }}
   - name: POSTGRES_DB
-    value: {{ default "" .Values.inPodPostgres.postgresDatabase | quote }}
+    value: {{ default "" .Values.postgresDatabase.postgresDatabase | quote }}
   - name: POSTGRES_INITDB_ARGS
-    value: {{ default "" .Values.inPodPostgres.postgresInitdbArgs | quote }}
+    value: {{ default "" .Values.postgresDatabase.postgresInitdbArgs | quote }}
   - name: PGDATA
     value: /var/lib/postgresql/data/pgdata
   - name: POSTGRES_PASSWORD
@@ -54,8 +54,8 @@ Create helm partial for postgres server
 {{ toYaml .Values.resources.postgres | indent 10 }}
   volumeMounts:
   - name: postgres-data
-    mountPath: {{ .Values.inPodPostgres.dataMountPath }}
-    subPath: {{ .Values.inPodPostgres.subPath }}
+    mountPath: {{ .Values.postgresDatabase.dataMountPath }}
+    subPath: {{ .Values.postgresDatabase.subPath }}
   {{- if .Values.usePasswordFile }}
   - name: password-file
     mountPath: /conf

@@ -264,11 +264,11 @@ data:
     NAME = {{ .Values.externalDB.dbDatabase }}
     USER = {{ .Values.externalDB.dbUser }}
     PASSWD = {{ .Values.externalDB.dbPassword }}
-    {{ else if .Values.useInPodPostgres }}
+    {{ else if .Values.usePostgresDatabase }}
     ; Either "mysql", "postgres", "mssql" or "sqlite3", it's your choice
     DB_TYPE = postgres
     HOST = 127.0.0.1:5432
-    NAME = {{ .Values.inPodPostgres.postgresDatabase }}
+    NAME = {{ .Values.postgresDatabase.postgresDatabase }}
     USER = postgres
     ; Use PASSWD = `your password` for quoting if you use special characters in the password.
     PASSWD = POSTGRES_PASSWORD

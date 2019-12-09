@@ -19,7 +19,7 @@ spec:
         app: {{ template "fullname" . }}
     spec:
       containers:
-      {{- if .Values.useInPodPostgres }}
+      {{- if .Values.usePostgresDatabase }}
       {{ include "postgres" . | indent 6 }}
       {{- end -}}
       {{ include "gitea" . | indent 6 }}
@@ -39,7 +39,7 @@ spec:
       {{- else }}
         emptyDir: {}
       {{- end }}
-      {{ if (.Values.useInPodPostgres) }}
+      {{ if (.Values.usePostgresDatabase) }}
       - name: postgres-data
       {{- if .Values.persistence.enabled }}
         {{- if .Values.persistence.directPostgresVolumeMount }}
