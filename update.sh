@@ -12,7 +12,7 @@ cd $DIR
 git clone https://github.com/cdrage/charts && cd charts
 
 for i in */; do
-  helm package --sign --key "Charlie Drage <charlie@charliedrage.com>" --keyring ~/.gnupg/secring.gpg gitea
+  helm package -f $i/values.yaml --sign --key "Charlie Drage <charlie@charliedrage.com>" --keyring ~/.gnupg/secring.gpg $i
 done
 
 mv *.tgz *.tgz.prov $CURRENT_DIR
