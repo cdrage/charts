@@ -6,17 +6,17 @@ Create helm partial for gitea server
   image: {{ .Values.images.gitea }}
   imagePullPolicy: {{ .Values.images.pullPolicy }}
   env:
-  - name: POSTGRES_PASSWORD
+  - name: MARIADB_PASSWORD
     valueFrom:
       secretKeyRef:
-        name: {{ template "db.fullname" . }}
-        key: dbPassword
+        name: {{ template "mariadb.fullname" . }}
+        key: mariadb-password
   - name: SCRIPT
     value: &script |-
       mkdir -p /datatmp/gitea/conf
-      #if [ ! -f /datatmp/gitea/conf/app.ini ]; then
-        sed "s/POSTGRES_PASSWORD/${POSTGRES_PASSWORD}/g" < /etc/gitea/app.ini > /datatmp/gitea/conf/app.ini
-      #fi
+      if [ ! -f /datatmp/gitea/conf/app.ini ]; then
+        sed "s/MARIADB_PASSWORD/${MARIADB_PASSWORD}/g" < /etc/gitea/app.ini > /datatmp/gitea/conf/app.ini
+      fi
   command: ["/bin/sh",'-c', *script]
   volumeMounts:
   - name: gitea-data

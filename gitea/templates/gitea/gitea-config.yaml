@@ -134,6 +134,8 @@ data:
     PROTOCOL = http
     {{- if .Values.service.http.externalHost }}
     DOMAIN = {{ .Values.service.http.externalHost }}
+    {{- else if .Values.ingress.enabled }}
+    DOMAIN = {{ .Values.ingress.hostname }}
     {{- else }}
     DOMAIN = {{ template "fullname" . }}-http.{{ .Release.Namespace }}.svc.cluster.local
     {{- end -}}
@@ -146,6 +148,8 @@ data:
     ROOT_URL = {{ .proto }}://{{ .Values.service.http.externalHost }}:{{ .Values.service.http.externalPort  }}/
     {{- else if .Values.service.http.externalHost }}
     ROOT_URL = {{ .proto }}://{{ .Values.service.http.externalHost }}/
+    {{- else if .Values.ingress.enabled }}
+    ROOT_URL = %(PROTOCOL)s://%(DOMAIN)s
     {{- else }}
     ROOT_URL = %(PROTOCOL)s://%(DOMAIN)s:%(HTTP_PORT)s/
     {{- end -}}
@@ -264,14 +268,18 @@ data:
     NAME = {{ .Values.externalDB.dbDatabase }}
     USER = {{ .Values.externalDB.dbUser }}
     PASSWD = {{ .Values.externalDB.dbPassword }}
-    {{ else if .Values.usePostgresDatabase }}
+    {{ else if .Values.mariadb.enabled }}
     ; Either "mysql", "postgres", "mssql" or "sqlite3", it's your choice
-    DB_TYPE = postgres
-    HOST = 127.0.0.1:5432
-    NAME = {{ .Values.postgresDatabase.postgresDatabase }}
-    USER = postgres
+    DB_TYPE = mysql
+    HOST = {{ template "mariadb.fullname" . }}:3306
+    NAME = {{ .Values.mariadb.db.name }}
+    USER = {{ .Values.mariadb.db.user }}
     ; Use PASSWD = `your password` for quoting if you use special characters in the password.
-    PASSWD = POSTGRES_PASSWORD
+    {{ if .Values.mariadb.password }}
+    PASSWD = {{ .Values.mariadb.db.password }}
+    {{ else }}
+    PASSWD = MARIADB_PASSWORD
+    {{ end }}
     {{ end }}
     ; For "postgres" only, either "disable", "require" or "verify-full"
     SSL_MODE = disable

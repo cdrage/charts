@@ -13,12 +13,15 @@ helm install gitea cdrage/gitea
 
 ## Introduction
 
-This chart bootstraps both [Gitea](http://gitea.com) and [Postgres](https://www.postgresql.org/) into a runnable pod.
+This chart bootstraps both [Gitea](http://gitea.com) and MariaDB.
 
 In this chart, the following are ran:
   - Gitea
   - Memcached
-  - Postgres
+  - Mariadb
+
+**NOTES:**
+  - You're unable to upgrade. See: https://github.com/helm/charts/tree/master/stable/mariadb (to be implemented) with regards to upgrading.
 
 ## Prerequisites
 
@@ -47,18 +50,18 @@ helm install gitea cdrage/gitea -f values.yaml
 
 ### Database Configuration
 
-By default, we will launch a Postgres database within the pod:
+By default, we will launch a Mariadb database:
 
 ```yaml
-dbType: "postgres"
-usePostgresDatabase: true
+mariadb:
+  enabled: true
 ```
 
 To use an external database, disable the in-pod database and fill in the "externalDB" values:
 
 ```yaml
-dbType: "postgres"
-usePostgresDatabase: false
+mariadb:
+  enabled: false
 
 #Connect to an external database
  externalDB:
@@ -97,7 +100,6 @@ To use a previously created PVC / volume, use the following:
 
 ```yaml
  existingGiteaClaim: gitea-gitea
- existingPostgresClaim: gitea-postgres
 ```
 
 ## Ingress And External Host/Ports
@@ -114,45 +116,6 @@ ingress:
 ```
 
 To expose the web application this chart will generate an ingress using the ingress controller of choice if specified. If an ingress is enabled services.http.externalHost must be specified. To expose SSH services it relies on either a LoadBalancer or NodePort.
-
-## Example values.yaml Configurations
-
-Below is an example configuration using GlusterFS as well as basic authentation against an NGINX ingress:
-
-```yaml
-ingress:
-  enabled: true
-  annotations:
-    kubernetes.io/ingress.class: nginx
-    nginx.ingress.kubernetes.io/proxy-body-size: "0"
-    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
-    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
-    nginx.ingress.kubernetes.io/auth-type: basic
-    nginx.ingress.kubernetes.io/auth-secret: basic-auth
-    nginx.ingress.kubernetes.io/auth-realm: "Authentication Required - lab2"
-
-service:
-  http:
-    serviceType: ClusterIP
-    port: 3000
-    externalPort: 8280
-    externalHost: git.example.com
-  ssh:
-    serviceType: NodePort
-    port: 22
-    nodePort: 30222
-    externalPort: 8022
-    externalHost: git.example.com
-
-persistence:
-  enabled: true
-  giteaSize: 10Gi
-  postgresSize: 5Gi
-  storageClass: glusterfs
-  accessMode: ReadWriteMany
-  annotations:
-    "helm.sh/resource-policy": keep
-```
 
 ## Configuration
 
@@ -196,23 +159,23 @@ The following table lists the configurable parameters of this chart and their de
 | `resources.memcached.requests.cpu`    | memcached container request cpu                                                                                              | `50m`                     |
 | `persistence.enabled`                 | Create PVCs to store gitea and postgres data?                                                                                | `false`                   |
 | `persistence.existingGiteaClaim`      | Already existing PVC that should be used for gitea data.                                                                     | `nil`                     |
-| `persistence.existingPostgresClaim`   | Already existing PVC that should be used for postgres data.                                                                  | `[]`                      |
 | `persistence.giteaSize`               | Size of gitea pvc to create                                                                                                  | `10Gi`                    |
 | `persistence.postgresSize`            | Size of postgres pvc to create                                                                                               | `5Gi`                     |
 | `persistence.annotations`             | Annotations to set on created PVCs                                                                                           | `nil`                     |
 | `persistence.storageClass`            | NStorageClass to use for dynamic provision if not 'default'                                                                  | `nil`                     |
+| `mariadb.enabled`                     | Enable or diable mariadb                                                                                                     | `true`                    |
+| `mariadb.replication.enabled`         | Enable or diable replication                                                                                                 | `false`                   |
+| `mariadb.db.name`                     | Default name                                                                                                                 | `gitea`                   |
+| `mariadb.db.user`                     | Default user                                                                                                                 | `gitea`                   |
+| `mariadb.persistence.enabled`         | Enable or diable persistence                                                                                                 | `true`                    |
+| `mariadb.persistence.accessMode`      | What access mode to use                                                                                                      | `ReadWriteOnce`           |
+| `mariadb.persistence.size`            | What size of database to use                                                                                                 | `8Gi`                     |
 | `externalDB.dbUser`                   | external db user                                                                                                             | ` unset`                  |
 | `externalDB.dbPassword`               | external db password                                                                                                         | ` unset`                  |
 | `externalDB.dbHost`                   | external db host                                                                                                             | ` unset`                  |
 | `externalDB.dbPort`                   | external db port                                                                                                             | ` unset`                  |
 | `externalDB.dbDatabase`               | external db database name                                                                                                    | ` unset`                  |
 | `dbType`                              | type of database storage                                                                                                     | ` "postgres"`             |
-| `usePostgresDatabase`                 | create a postgres pos for db storage -must use externalDB if false                                                           | ` true`                   |
-| `postgresDatabase.secret`             | Generated Secret to store postgres passwords                                                                                 | `postgressecrets`         |
-| `postgresDatabase.subPath`            | Subpath for Postgres data storage                                                                                            | `nil`                     |
-| `postgresDatabase.dataMountPath`      | Path for Postgres data storage                                                                                               | `nil`                     |
-| `postgresDatabase.usePasswordFile`    | Inject postgresPassword via a volume mount instead of env variable                                                           | `false`                   |
-| `postgresDatabase.postgresDatabase`   | Use a postgres database                                                                                                      | `gitea`                   |
 | `config.disableInstaller`             | Disable the installer                                                                                                        | `false`                   |
 | `config.offlineMode`                  | Sets Gitea's Offline Mode. Values are `true` or `false`.                                                                     | `false`                   |
 | `config.requireSignin`                | Require Gitea user to be signed in to see any pages. Values are `true` or `false`.                                           | `false`                   |
