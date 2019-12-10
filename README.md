@@ -12,7 +12,7 @@ Each chart strives to **always** have an emphasis on:
 Add the repo!
 
 ```sh
-helm repo add cdrage http://charts.charliedrage.com
+helm repo add cdrage https://charts.charliedrage.com
 ```
 
 Install a test chart:

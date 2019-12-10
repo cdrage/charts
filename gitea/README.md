@@ -7,7 +7,7 @@ This chart is based upon the work done by [@jfelten](https://github.com/jfelten/
 ## TLDR
 
 ```sh
-helm repo add cdrage http://charts.charliedrage.com
+helm repo add cdrage https://charts.charliedrage.com
 helm install gitea cdrage/gitea
 ```
 
@@ -33,7 +33,7 @@ By default, we use ingress to expose the service.
 To install WITHOUT persistent storage / development:
 
 ```bash
-helm repo add cdrage http://charts.charliedrage.com
+helm repo add cdrage https://charts.charliedrage.com
 helm install gitea cdrage/gitea
 ```
 
