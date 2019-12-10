@@ -131,7 +131,6 @@ The following table lists the configurable parameters of this chart and their de
 | Parameter                             | Description                                                                                                                  | Default                   |
 |---------------------------------------|------------------------------------------------------------------------------------------------------------------------------|---------------------------|
 | `images.gitea`                        | `gitea` image                                                                                                                | `gitea/gitea:1.9.3`       |
-| `images.postgres`                     | `postgres` image                                                                                                             | `postgres:11`             |
 | `images.memcached`                    | `memcached` image                                                                                                            | `memcached:1.5.19-alpine` |
 | `images.pullPolicy`                   | Image pull policy                                                                                                            | `IfNotPresent`            |
 | `images.pullSecrets`                  | Specify an array of pull secrets                                                                                             | `[]`                      |
@@ -158,14 +157,11 @@ The following table lists the configurable parameters of this chart and their de
 | `resources.gitea.requests.cpu`        | gitea container request cpu                                                                                                  | `1000m`                   |
 | `resources.gitea.limits.memory`       | gitea container memory limits                                                                                                | `2Gi`                     |
 | `resources.gitea.limits.cpu`          | gitea container CPU/Memory resource requests/limits                                                                          | `1`                       |
-| `resources.postgres.requests.memory`  | postgres container memory request                                                                                            | `200Mi`                   |
-| `resources.postgres.requests.cpu`     | postgres container request cpu                                                                                               | `200m`                    |
 | `resources.memcached.requests.memory` | memcached container memory request                                                                                           | `64Mi`                    |
 | `resources.memcached.requests.cpu`    | memcached container request cpu                                                                                              | `50m`                     |
-| `persistence.enabled`                 | Create PVCs to store gitea and postgres data?                                                                                | `false`                   |
+| `persistence.enabled`                 | Create PVCs to store gitea data                                                                               | `false`                   |
 | `persistence.existingGiteaClaim`      | Already existing PVC that should be used for gitea data.                                                                     | `nil`                     |
 | `persistence.giteaSize`               | Size of gitea pvc to create                                                                                                  | `10Gi`                    |
-| `persistence.postgresSize`            | Size of postgres pvc to create                                                                                               | `5Gi`                     |
 | `persistence.annotations`             | Annotations to set on created PVCs                                                                                           | `nil`                     |
 | `persistence.storageClass`            | NStorageClass to use for dynamic provision if not 'default'                                                                  | `nil`                     |
 | `mariadb.enabled`                     | Enable or diable mariadb                                                                                                     | `true`                    |
@@ -180,7 +176,6 @@ The following table lists the configurable parameters of this chart and their de
 | `externalDB.dbHost`                   | external db host                                                                                                             | ` unset`                  |
 | `externalDB.dbPort`                   | external db port                                                                                                             | ` unset`                  |
 | `externalDB.dbDatabase`               | external db database name                                                                                                    | ` unset`                  |
-| `dbType`                              | type of database storage                                                                                                     | ` "postgres"`             |
 | `config.disableInstaller`             | Disable the installer                                                                                                        | `false`                   |
 | `config.offlineMode`                  | Sets Gitea's Offline Mode. Values are `true` or `false`.                                                                     | `false`                   |
 | `config.requireSignin`                | Require Gitea user to be signed in to see any pages. Values are `true` or `false`.                                           | `false`                   |
