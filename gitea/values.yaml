@@ -7,7 +7,7 @@ tags:
 
 images:
   registry: docker.io
-  gitea: "gitea/gitea:1.9.3"
+  gitea: "gitea/gitea:1.10.1"
   memcached: "memcached:1.5.19-alpine"
   pullPolicy: IfNotPresent
   ## Optionally specify an array of imagePullSecrets.
@@ -118,8 +118,8 @@ resources:
 ## ref:
 ##
 persistence:
-  enabled: true
-  existingGiteaClaim: gitea-gitea
+  enabled: false
+  # existingGiteaClaim: gitea-gitea
   giteaSize: 10Gi
   # storageClass: glusterfs
   accessMode: ReadWriteMany
@@ -159,20 +159,20 @@ mariadb:
     user: gitea
     ## If the password is not specified, mariadb will generates a random password
     ##
-    # password:
+    # password: ThisIsMySuperSecretPassword
 
   ## MariaDB admin password
   ## ref: https://github.com/bitnami/bitnami-docker-mariadb/blob/master/README.md#setting-the-root-password-on-first-run
   ##
-  # rootUser:
-  #   password:
+  rootUser:
+    # password: ThisIsMySuperSecretPassword
 
   ## Enable persistence using Persistent Volume Claims
   ## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
   ##
   master:
     persistence:
-      enabled: true
+      enabled: false
       ## mariadb data Persistent Volume Storage Class
       ## If defined, storageClassName: <storageClass>
       ## If set to "-", storageClassName: "", which disables dynamic provisioning

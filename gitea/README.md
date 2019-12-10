@@ -20,9 +20,6 @@ In this chart, the following are ran:
   - Memcached
   - Mariadb
 
-**NOTES:**
-  - You're unable to upgrade. See: https://github.com/helm/charts/tree/master/stable/mariadb (to be implemented) with regards to upgrading.
-
 ## Prerequisites
 
 - Kubernetes 1.12+
@@ -116,6 +113,14 @@ ingress:
 ```
 
 To expose the web application this chart will generate an ingress using the ingress controller of choice if specified. If an ingress is enabled services.http.externalHost must be specified. To expose SSH services it relies on either a LoadBalancer or NodePort.
+
+## Upgrading
+
+When upgrading, make sure you have the following enabled:
+
+  - Persistency for both mariadb + Gitea
+  - Using `existingGiteaClaim`
+  - Due to using the [bitnami/mariadb](https://github.com/helm/charts/tree/master/stable/mariadb) chart, make sure to HARDCODE your passwords within `values.yaml`.  Or else you'll be unable to update mariadb
 
 ## Configuration
 
