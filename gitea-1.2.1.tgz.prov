@@ -1,0 +1,49 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA512
+
+apiVersion: v2
+appVersion: 1.9.3
+dependencies:
+- - condition: mariadb.enabled
+  name: mariadb
+  repository: https://charts.bitnami.com
+  tags:
+  - mariadb
+  version: 7.3.0
+description: Git with a cup of tea
+icon: https://docs.gitea.io/images/gitea.png
+keywords:
+- - git
+- - issue tracker
+- - code review
+- - wiki
+- - gitea
+- - gogs
+maintainers:
+- - email: charlie@charliedrage.com
+  name: Charlie Drage
+name: gitea
+sources:
+- - https://github.com/go-gitea/gitea
+- - https://hub.docker.com/r/gitea/gitea/
+version: 1.2.1
+
+...
+files:
+  gitea-1.2.1.tgz: sha256:28512a78d8359c1f48686bdd1330039560481670aa74a1d4127af7e9f968be11
+-----BEGIN PGP SIGNATURE-----
+
+wsFcBAEBCgAQBQJd8A6yCRDaInQDwDfWFwAAc+0QAGufY5zat8c9ATsZMP1319bf
+v++c3AcfHE6mjspz6OQ0AvqlTl4nlPD6Zmt906G4OYoJKH2sMbtndSr9iNHUqCOA
+7/+/p4f83EhL06lQIvEsB9y2iMeazEvh+HOKsOkwd7mCU8CdygGfqji5M+zq/Zr7
+Sn1gxX/NqZg7J2hxvNzfbNyHOqEqMdV7YRssIQ1SITT2HMWN7FRaLeJevbYZzrpp
+Qsq0jojDoHblntzBmkdMSutyWJMepSyWF90qeKSy+RlT4L9KJtUeiwz8K6AFiFAC
+6erMDHySV8HMp4ktnThCGxV++49FH4LAayiYclquLJz9GB71K7fnt/yToPAL+aqG
+P709xwmYjFtJcQ5xFc9pMPYLoT9I6w5m4m+HDnYhC36iiUEWHViGlcZNlpSM0Q1u
+DEw3b1rIHUNm3+5SiKFmVnyLrjSrxn9kWNAvi+I+/juPC1iy39NZxtPuSad88aPw
+eGvzUsCbHOWBy3jBRz/lTuCXv0Kpo26LC+9KMZFU7QPffkGFqgTIEKcJvBJF2c1M
+ZbDYKv3WI1maJlp0qRtoGCKaak5mZd/RcsKKgZZnZWDJ7oStPwvySgxwfxZepeII
+M5WdIqz0zXv1DZ9EqlHYMWoCzUi4TUFvDUtx0B+vsgxWHQpZCVnRNMleg/QAJJ3Q
+YSkzq6XSiloxYa1CB0mm
+=Gkrc
+-----END PGP SIGNATURE-----

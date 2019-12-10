@@ -3,7 +3,37 @@ entries:
   gitea:
   - apiVersion: v2
     appVersion: 1.9.3
-    created: "2019-12-10T12:14:38.359092826-05:00"
+    created: "2019-12-10T16:31:30.329192782-05:00"
+    dependencies:
+    - condition: mariadb.enabled
+      name: mariadb
+      repository: https://charts.bitnami.com
+      tags:
+      - mariadb
+      version: 7.3.0
+    description: Git with a cup of tea
+    digest: 28512a78d8359c1f48686bdd1330039560481670aa74a1d4127af7e9f968be11
+    icon: https://docs.gitea.io/images/gitea.png
+    keywords:
+    - git
+    - issue tracker
+    - code review
+    - wiki
+    - gitea
+    - gogs
+    maintainers:
+    - email: charlie@charliedrage.com
+      name: Charlie Drage
+    name: gitea
+    sources:
+    - https://github.com/go-gitea/gitea
+    - https://hub.docker.com/r/gitea/gitea/
+    urls:
+    - gitea-1.2.1.tgz
+    version: 1.2.1
+  - apiVersion: v2
+    appVersion: 1.9.3
+    created: "2019-12-10T16:31:30.326689111-05:00"
     dependencies:
     - condition: mariadb.enabled
       name: mariadb
@@ -33,7 +63,7 @@ entries:
     version: 1.2.0
   - apiVersion: v2
     appVersion: 1.9.3
-    created: "2019-12-10T12:14:38.355860324-05:00"
+    created: "2019-12-10T16:31:30.323470424-05:00"
     description: Git with a cup of tea
     digest: 2c599bb82ab11f4746b76d04a0ff954e307bdd76247816dbcbd95ee0ccd71258
     icon: https://docs.gitea.io/images/gitea.png
@@ -56,7 +86,7 @@ entries:
     version: 1.1.0
   - apiVersion: v2
     appVersion: 1.9.3
-    created: "2019-12-10T12:14:38.354859541-05:00"
+    created: "2019-12-10T16:31:30.32253094-05:00"
     description: Git with a cup of tea
     digest: b12eaf175ba3898330239840b63d9d00a6f44a352b8c109ac30f1d942f896696
     icon: https://docs.gitea.io/images/gitea.png
@@ -79,7 +109,7 @@ entries:
     version: 1.0.2
   - apiVersion: v2
     appVersion: 1.9.3
-    created: "2019-12-10T12:14:38.353960237-05:00"
+    created: "2019-12-10T16:31:30.321569947-05:00"
     description: Git with a cup of tea
     digest: be5646c0b3408eb49dac6fc4b5d63bef8453d560db5cb80a9933938876986069
     icon: https://docs.gitea.io/images/gitea.png
@@ -100,4 +130,4 @@ entries:
     urls:
     - gitea-1.0.1.tgz
     version: 1.0.1
-generated: "2019-12-10T12:14:38.352903192-05:00"
+generated: "2019-12-10T16:31:30.320534003-05:00"
